@@ -88,8 +88,66 @@ public class PacienteDaoH2 implements IDao<Paciente> {
 
     @Override
     public Paciente buscarPorId(int id) {
-        return null;
+
+        Connection connection = null;
+        Paciente pacienteEncontrado = null;
+
+        //QUERY
+        String SELECT = "SELECT * FROM PACIENTES WHERE ID = ?";
+
+
+        //-------TRY--------
+
+
+        try{
+
+            //Conexión
+            connection = H2Connection.getConnection();
+            connection.setAutoCommit(false);
+
+
+            //PreparedStatement
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, id);
+
+
+
+            //ResultSET + Ejecución
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+
+                pacienteEncontrado = crearObjetoPaciente(resultSet);  //terminar
+
+            }
+
+
+
+            LOGGER.info("Se ha encontrado el paciente: " + pacienteEncontrado);
+
+
+
+
+
+        } catch (Exception e) {
+            LOGGER.error("Hubo un problema... " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            try{
+                connection.close();
+
+            } catch(Exception ex){
+
+                LOGGER.error("tuvimos un problema cerrando la conexión... " + ex.getMessage());
+                ex.printStackTrace();
+
+            }
+        }
+
+        return pacienteEncontrado;
     }
+
 
     @Override
     public List<Paciente> listarTodos() {

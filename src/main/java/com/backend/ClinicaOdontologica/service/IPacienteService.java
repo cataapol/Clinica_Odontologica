@@ -9,5 +9,5 @@ import java.util.List;
 public interface IPacienteService {
     Paciente registrarPaciente(Paciente paciente);
     List<Paciente> listarPacientes();
-    Paciente buscarPacientePorId(int id);
+    Paciente buscarPorId(int id);
 }

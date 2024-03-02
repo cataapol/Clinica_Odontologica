@@ -1,6 +1,10 @@
 package com.backend.ClinicaOdontologica.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
+
+
 
 public class Paciente {
     private int id;

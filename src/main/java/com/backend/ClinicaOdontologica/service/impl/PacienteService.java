@@ -29,7 +29,7 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public Paciente buscarPacientePorId(int id) {
+    public Paciente buscarPorId(int id) {
         return pacienteIDao.buscarPorId(id);
     }
 }

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,11 +35,18 @@ public class PacienteDaoMemoria implements IDao<Paciente> {
 
     @Override
     public Paciente buscarPorId(int id) {
-        return null;
+        for (Paciente paciente : pacienteRepository) {
+            if (paciente.getId() == id) {
+                return paciente;
+            }
+        }
+        return null; // No se encontró el paciente
     }
+
 
     @Override
     public List<Paciente> listarTodos() {
-        return null;
+        LOGGER.info("Se encontraron los pacientes: " + pacienteRepository);
+        return new ArrayList<>(pacienteRepository);
     }
 }
