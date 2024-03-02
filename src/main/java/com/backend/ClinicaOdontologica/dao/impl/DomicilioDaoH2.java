@@ -143,4 +143,6 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
         return new Domicilio(resultSet.getInt("id"), resultSet.getString("calle"), resultSet.getInt("numero"),resultSet.getString("localidad"), resultSet.getString("provincia"));
 
     }
+
+
 }

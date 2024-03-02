@@ -90,7 +90,7 @@ public class PacienteDaoH2 implements IDao<Paciente> {
     public Paciente buscarPorId(int id) {
 
         Connection connection = null;
-        Paciente pacienteEncontrado = null;
+        Paciente paciente = null;
 
         //QUERY
         String SELECT = "SELECT * FROM PACIENTES WHERE ID = ?";
@@ -103,11 +103,10 @@ public class PacienteDaoH2 implements IDao<Paciente> {
 
             //Conexión
             connection = H2Connection.getConnection();
-            connection.setAutoCommit(false);
 
 
             //PreparedStatement
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
 
             preparedStatement.setInt(1, id);
 
@@ -118,13 +117,12 @@ public class PacienteDaoH2 implements IDao<Paciente> {
 
             while(resultSet.next()){
 
-                pacienteEncontrado = crearObjetoPaciente(resultSet);  //terminar
+                paciente = crearObjetoPaciente(resultSet);  //terminar
 
             }
 
-
-
-            LOGGER.info("Se ha encontrado el paciente: " + pacienteEncontrado);
+            if(paciente == null)LOGGER.error("No se encontro al paciente con el id " + id);
+            else LOGGER.info("Se ha encontrado el paciente: " + paciente);
 
 
 
@@ -145,7 +143,7 @@ public class PacienteDaoH2 implements IDao<Paciente> {
             }
         }
 
-        return pacienteEncontrado;
+        return paciente;
     }
 
 
