@@ -4,6 +4,7 @@ package com.backend.ClinicaOdontologica.dao.impl;
 import com.backend.ClinicaOdontologica.dao.IDao;
 import com.backend.ClinicaOdontologica.dbconnection.H2Connection;
 import com.backend.ClinicaOdontologica.entity.Odontologo;
+import com.backend.ClinicaOdontologica.entity.Paciente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -160,7 +161,44 @@ public class OdontologoDAOH2 implements IDao<Odontologo> {
 
     @Override
     public Odontologo buscarPorId(int id) {
-        return null;
+
+        Connection connection = null;
+
+        Odontologo odontologoEncontrado = null;
+
+        try {
+
+            connection = H2Connection.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ODONTOLOGOS WHERE ID = ?");
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                odontologoEncontrado = crearObjetoOdontologo(resultSet);
+            }
+
+            if (odontologoEncontrado == null) LOGGER.error("No se ha encontrado el odontologo con el id:" + id);
+
+            else LOGGER.info("Se ha encontrado el odontologo " + odontologoEncontrado);
+
+        } catch (Exception e) {
+            LOGGER.error("Hubo un problema... " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+
+            } catch (Exception ex) {
+
+                LOGGER.error("tuvimos un problema cerrando la conexión... " + ex.getMessage());
+                ex.printStackTrace();
+
+            }
+        }
+        return odontologoEncontrado;
     }
 
     private Odontologo crearObjetoOdontologo(ResultSet resultSet) throws SQLException {

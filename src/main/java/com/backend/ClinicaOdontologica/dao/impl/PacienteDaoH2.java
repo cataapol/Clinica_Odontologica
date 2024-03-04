@@ -90,61 +90,44 @@ public class PacienteDaoH2 implements IDao<Paciente> {
     public Paciente buscarPorId(int id) {
 
         Connection connection = null;
-        Paciente paciente = null;
 
-        //QUERY
-        String SELECT = "SELECT * FROM PACIENTES WHERE ID = ?";
+        Paciente pacienteEncontrado = null;
 
+        try {
 
-        //-------TRY--------
-
-
-        try{
-
-            //Conexión
             connection = H2Connection.getConnection();
 
-
-            //PreparedStatement
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PACIENTES WHERE ID = ?");
 
             preparedStatement.setInt(1, id);
 
-
-
-            //ResultSET + Ejecución
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
-
-                paciente = crearObjetoPaciente(resultSet);  //terminar
-
+            while (resultSet.next()) {
+                pacienteEncontrado = crearObjetoPaciente(resultSet);
             }
 
-            if(paciente == null)LOGGER.error("No se encontro al paciente con el id " + id);
-            else LOGGER.info("Se ha encontrado el paciente: " + paciente);
+            if (pacienteEncontrado == null) LOGGER.error("No se ha encontrado el paciente con el id:" + id);
 
-
-
-
+            else LOGGER.info("Se ha encontrado el paciente " + pacienteEncontrado);
 
         } catch (Exception e) {
             LOGGER.error("Hubo un problema... " + e.getMessage());
             e.printStackTrace();
         } finally {
-            try{
+            try {
                 connection.close();
 
-            } catch(Exception ex){
+            } catch (Exception ex) {
 
                 LOGGER.error("tuvimos un problema cerrando la conexión... " + ex.getMessage());
                 ex.printStackTrace();
 
             }
         }
-
-        return paciente;
+        return pacienteEncontrado;
     }
+
 
 
     @Override

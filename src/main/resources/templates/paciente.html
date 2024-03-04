@@ -9,5 +9,8 @@
 </head>
 <body>
 <p>Hola Paciente <span th:text="${nombre}"></span> <span th:text="${apellido}"></span></p>
+<span>Hola Odontologo: <tr th:each="odontologo: ${odontologos}">
+  <p><span th:text="${nroMatricula}"></span></p>
+</tr></span>
 </body>
 </html>

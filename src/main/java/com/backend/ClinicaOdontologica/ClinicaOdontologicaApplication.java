@@ -27,7 +27,7 @@ public class ClinicaOdontologicaApplication {
 		try {
 
 			Class.forName("org.h2.Driver");
-			connection = DriverManager.getConnection("jdbc:h2:~/clinicaH2DataBase;INIT=RUNSCRIPT FROM 'create.sql'", "catalina", "violettatini");
+			connection = DriverManager.getConnection("jdbc:h2:~/clinicaH2DB;INIT=RUNSCRIPT FROM 'create.sql'", "catalina", "violettatini");
 
 
 		}catch (Exception e){
