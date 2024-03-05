@@ -2,12 +2,13 @@ package com.backend.ClinicaOdontologica.controller;
 
 import com.backend.ClinicaOdontologica.entity.Odontologo;
 import com.backend.ClinicaOdontologica.service.IOdontologoService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/odontologos")
 
 public class OdontologoController {
@@ -31,7 +32,6 @@ public class OdontologoController {
 
 
         return "paciente";
-
 
     }
 

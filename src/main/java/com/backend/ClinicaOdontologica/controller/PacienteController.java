@@ -3,13 +3,14 @@ package com.backend.ClinicaOdontologica.controller;
 
 import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/pacientes")
 public class PacienteController {
 
@@ -24,10 +25,23 @@ public class PacienteController {
 
     //-----------------------
 
+    @PostMapping("/registrarPaciente")
+    public String registrar(Model model, @RequestBody Paciente paciente){
+
+
+        Paciente pacienteRegistrado = pacienteService.registrarPaciente(paciente);
+
+
+        return "paciente";
+
+
+    }
+
+
     @GetMapping("/buscarPorId")
     public String buscarPorID(Model model, @RequestParam int id){ //@RequestParam -> el parametro id esta requerido en la peticion post
 
-        //Nuevo objeto llamando a la capa de Servicio para que  realice la acción del método
+        //Instancia paciente llamando a la capa de Servicio para que  realice la acción del método
         Paciente paciente = pacienteService.buscarPorId(id);
 
         //EnviandoINFO a la vista
@@ -46,15 +60,4 @@ public class PacienteController {
     }
     //----------------------
 
-    @PostMapping("/registrarPaciente")
-    public String registrar(Model model, @RequestBody Paciente paciente){
-
-
-        Paciente pacienteRegistrado = pacienteService.registrarPaciente(paciente);
-
-
-        return "paciente";
-
-
-    }
 }
