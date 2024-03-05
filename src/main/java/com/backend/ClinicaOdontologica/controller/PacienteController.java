@@ -3,7 +3,6 @@ package com.backend.ClinicaOdontologica.controller;
 
 import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,16 +37,6 @@ public class PacienteController {
         return "paciente"; //VISTA ex: paciente.html
 
     }
-
-
-
-
-
-
-
-    //Se espera que model sea utilizado para agregar información relacionada con el paciente antes de mostrarla en la vista.
-
-
 
 
 

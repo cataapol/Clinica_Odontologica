@@ -4,11 +4,13 @@ import com.backend.ClinicaOdontologica.entity.Odontologo;
 
 import java.util.List;
 
-public interface IOdontologoService {
+public interface IOdontologoService{
 
-    Odontologo registrar (Odontologo odontologo);
+    Odontologo registraOdontologo(Odontologo odontologo);
 
-    Odontologo buscarPorId (int id);
+    Odontologo buscarOdontologoPorId(int id);
 
-    List<Odontologo> listarTodos ();
+    List<Odontologo> listarTodosLosOdontologos();
+
+
 }

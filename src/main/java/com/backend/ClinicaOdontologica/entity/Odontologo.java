@@ -1,5 +1,8 @@
 package com.backend.ClinicaOdontologica.entity;
 
+import org.springframework.stereotype.Component;
+
+
 public class Odontologo {
 
     private int id;

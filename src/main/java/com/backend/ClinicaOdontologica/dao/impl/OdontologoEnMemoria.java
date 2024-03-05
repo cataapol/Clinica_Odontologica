@@ -2,12 +2,13 @@ package com.backend.ClinicaOdontologica.dao.impl;
 
 import com.backend.ClinicaOdontologica.dao.IDao;
 import com.backend.ClinicaOdontologica.entity.Odontologo;
+import com.backend.ClinicaOdontologica.entity.Paciente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class OdontologoEnMemoria implements IDao<Odontologo> { //Nuevo IDAO??
+public class OdontologoEnMemoria implements IDao<Odontologo> {
     private final Logger LOGGER = LoggerFactory.getLogger(OdontologoEnMemoria.class);
     private List<Odontologo> odontologoRepository;
 
@@ -31,8 +32,6 @@ public class OdontologoEnMemoria implements IDao<Odontologo> { //Nuevo IDAO??
     }
 
 
-    //--------------------------------------------------
-
 
     @Override
     public List<Odontologo> listarTodos() {
@@ -43,10 +42,19 @@ public class OdontologoEnMemoria implements IDao<Odontologo> { //Nuevo IDAO??
     }
 
 
+
     @Override
     public Odontologo buscarPorId(int id) {
-        return null;
+        for (Odontologo odontologo : odontologoRepository) {
+            if (odontologo.getId() == id) {
+                return odontologo;
+            }
+        }
+        return null; // No se encontró el paciente
     }
+    //--------------------------------------------------
+
+
 }
 
 

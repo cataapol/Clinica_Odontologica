@@ -17,19 +17,19 @@ public class OdontologoService implements IOdontologoService {
         this.odontologoIDao = odontologoIDao;
     }
 
+
     @Override
-    public Odontologo registrar(Odontologo odontologo) {
-        return odontologoIDao.registrar(odontologo);
+    public Odontologo registraOdontologo(Odontologo odontologo) {
+       return odontologoIDao.registrar(odontologo);
     }
 
     @Override
-    public Odontologo buscarPorId(int id) {
+    public Odontologo buscarOdontologoPorId(int id) {
         return odontologoIDao.buscarPorId(id);
     }
 
     @Override
-    public List<Odontologo> listarTodos() {
+    public List<Odontologo> listarTodosLosOdontologos() {
         return odontologoIDao.listarTodos();
     }
-
 }

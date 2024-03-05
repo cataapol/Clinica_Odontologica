@@ -23,18 +23,29 @@ public class OdontologoController {
 
     //-----------------------
 
+    @PostMapping("/registrarOdontologo")
+    public String registrar(Model model, @RequestBody Odontologo odontologo){
+
+
+        Odontologo paciente1 = odontologoService.registraOdontologo(odontologo);
+
+
+        return "paciente";
+
+
+    }
 
 
     @GetMapping("/buscarPorId")
     public String buscarPorID(Model model, @RequestParam int id){ //@RequestParam -> el parametro id esta requerido en la peticion post
 
         //Nuevo objeto llamando a la capa de Servicio para que  realice la acción del método
-        Odontologo odontologo =  odontologoService.buscarPorId(id);
+        Odontologo odontologo =  odontologoService.buscarOdontologoPorId(id);
 
 
         //Enviando INFO a la vista
-        model.addAttribute("nombre", odontologo.getNombre());
-        model.addAttribute("apellido", odontologo.getApellido());
+        model.addAttribute("nroMatricula", odontologo.getNroMatricula());
+
 
         return "paciente"; //VISTA ex: paciente.html
 
@@ -53,8 +64,8 @@ public class OdontologoController {
 
 
     @GetMapping("/buscarTodos")
-    public String listarTodosLosOdontologos (Model model) {
-        List<Odontologo> odontologos = odontologoService.listarTodos();
+    public String listarTodosLosOdontologos(Model model) {
+        List<Odontologo> odontologos = odontologoService.listarTodosLosOdontologos();
 
         model.addAttribute("odontologos", odontologos);
 
@@ -62,16 +73,4 @@ public class OdontologoController {
 
     }
     //----------------------
-
-    @PostMapping("/registrarOdontologo")
-    public String registrar(Model model, @RequestBody Odontologo odontologo){
-
-
-        Odontologo paciente1 = odontologoService.registrar (odontologo);
-
-
-        return "paciente";
-
-
-    }
 }

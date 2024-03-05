@@ -21,6 +21,14 @@ public class PacienteDaoMemoria implements IDao<Paciente> {
         this.pacienteRepository = pacienteRepository;
     }
 
+
+    @Override
+    public List<Paciente> listarTodos() {
+        LOGGER.info("Se encontraron los pacientes: " + pacienteRepository);
+        return new ArrayList<>(pacienteRepository);
+    }
+
+
     @Override
     public Paciente registrar(Paciente paciente) {
         int id = pacienteRepository.size() + 1;
@@ -43,10 +51,4 @@ public class PacienteDaoMemoria implements IDao<Paciente> {
         return null; // No se encontró el paciente
     }
 
-
-    @Override
-    public List<Paciente> listarTodos() {
-        LOGGER.info("Se encontraron los pacientes: " + pacienteRepository);
-        return new ArrayList<>(pacienteRepository);
-    }
 }

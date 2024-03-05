@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 
 
+
 public class Paciente {
     private int id;
     private String nombre;
