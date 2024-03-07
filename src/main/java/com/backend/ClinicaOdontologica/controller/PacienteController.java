@@ -61,7 +61,7 @@ public class PacienteController {
     @DeleteMapping("{id}") //
         public ResponseEntity<?> eliminarPaciente(@PathVariable int id){
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
-        //pacienteService.eliminarPaciente(id)//LE FALTA EL RESPONSE ENTITY STATUS = HttpStatus.OK
+        //pacienteService.eliminarPaciente(id)//LE FALTA EL RESPONSE ENTITY
 
     }
 

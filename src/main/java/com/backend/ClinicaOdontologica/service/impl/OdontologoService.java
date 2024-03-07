@@ -2,6 +2,8 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 
 import com.backend.ClinicaOdontologica.dao.IDao;
+import com.backend.ClinicaOdontologica.dto.entrada.OdontologoEntradaDto;
+import com.backend.ClinicaOdontologica.dto.salida.OdontologoSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Odontologo;
 import com.backend.ClinicaOdontologica.service.IOdontologoService;
 import org.springframework.stereotype.Service;
@@ -19,17 +21,17 @@ public class OdontologoService implements IOdontologoService {
 
 
     @Override
-    public Odontologo registraOdontologo(Odontologo odontologo) {
+    public OdontologoSalidaDto registraOdontologo(OdontologoEntradaDto odontologo) {
        return odontologoIDao.registrar(odontologo);
     }
 
     @Override
-    public Odontologo buscarOdontologoPorId(int id) {
+    public OdontologoSalidaDto buscarOdontologoPorId(int id) {
         return odontologoIDao.buscarPorId(id);
     }
 
     @Override
-    public List<Odontologo> listarTodosLosOdontologos() {
+    public List<OdontologoSalidaDto> listarTodosLosOdontologos() {
         return odontologoIDao.listarTodos();
     }
 }

@@ -20,15 +20,14 @@ public class PacienteService implements IPacienteService {
         this.pacienteIDao = pacienteIDao;
     }
 
-    @Override
-    public Paciente registrarPaciente(Paciente paciente) {
-        return pacienteIDao.registrar(paciente);
-    }
+    //--------------------------------
+
 
     @Override
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) {
-        return null;
+        return pacienteIDao.registrar(paciente);
     }
+
 
     @Override
     public List<PacienteSalidaDto> listarPacientes() {
