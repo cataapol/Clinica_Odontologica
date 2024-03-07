@@ -3,6 +3,8 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 
 import com.backend.ClinicaOdontologica.dao.IDao;
+import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
+import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
 import org.springframework.stereotype.Service;
@@ -24,12 +26,17 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public List<Paciente> listarPacientes() {
+    public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) {
+        return null;
+    }
+
+    @Override
+    public List<PacienteSalidaDto> listarPacientes() {
         return pacienteIDao.listarTodos();
     }
 
     @Override
-    public Paciente buscarPorId(int id) {
+    public PacienteSalidaDto buscarPorId(int id) {
         return pacienteIDao.buscarPorId(id);
     }
 }

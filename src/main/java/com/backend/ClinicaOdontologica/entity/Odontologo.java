@@ -7,23 +7,23 @@ public class Odontologo {
 
     private int id;
 
-    private int nroMatricula;
+    private String matricula;
 
     private String nombre;
 
     private String apellido;
 
 
-    public Odontologo(int id, int nroMatricula, String nombre, String apellido) {
+    public Odontologo(int id, String matricula, String nombre, String apellido) {
         this.id = id;
-        this.nroMatricula = nroMatricula;
+        this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
 
-    public Odontologo(int nroMatricula, String nombre, String apellido) {
-        this.nroMatricula = nroMatricula;
+        public Odontologo(String matricula, String nombre, String apellido) {
+        this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
     }
@@ -37,12 +37,12 @@ public class Odontologo {
         this.id = id;
     }
 
-    public int getNroMatricula() {
-        return nroMatricula;
+    public String getMatricula() {
+        return matricula;
     }
 
-    public void setNroMatricula(int nroMatricula) {
-        this.nroMatricula = nroMatricula;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getNombre() {
@@ -66,7 +66,7 @@ public class Odontologo {
     public String toString() {
         return "Odontologo{" +
                 "id=" + id +
-                ", nroMatricula=" + nroMatricula +
+                ", matricula=" + matricula +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 '}';

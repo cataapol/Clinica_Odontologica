@@ -1,16 +1,19 @@
 package com.backend.ClinicaOdontologica.controller;
 
 
+import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
+import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
 
@@ -25,39 +28,72 @@ public class PacienteController {
 
     //-----------------------
 
-    @PostMapping("/registrarPaciente")
-    public String registrar(Model model, @RequestBody Paciente paciente){
 
 
-        Paciente pacienteRegistrado = pacienteService.registrarPaciente(paciente);
-
-
-        return "paciente";
-
-
+    //POST
+    @PostMapping("registrar")
+    public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
+        return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
 
 
-    @GetMapping("/buscarPorId")
-    public String buscarPorID(Model model, @RequestParam int id){ //@RequestParam -> el parametro id esta requerido en la peticion post
 
-        //Instancia paciente llamando a la capa de Servicio para que  realice la acción del método
-        Paciente paciente = pacienteService.buscarPorId(id);
 
-        //EnviandoINFO a la vista
-            model.addAttribute("nombre", paciente.getNombre());
-            model.addAttribute("apellido", paciente.getApellido());
-
-        return "paciente"; //VISTA ex: paciente.html
-
+    //GET
+    @GetMapping("/PacienteId")
+    public ResponseEntity<PacienteSalidaDto> buscarPacientePorID(@RequestParam int id){
+         return new ResponseEntity<>(pacienteService.buscarPorId(id), HttpStatus.OK);
     }
 
 
 
     @GetMapping("/buscarTodos")
-    public List<Paciente> listarTodosLosPacientes(){
-        return pacienteService.listarPacientes();
+    public ResponseEntity<List<PacienteSalidaDto>> listarTodosLosPacientes(){
+        return new ResponseEntity<>(pacienteService.listarPacientes(), HttpStatus.OK);
     }
-    //----------------------
+
+
+
+
+
+
+    //DELETE
+    @DeleteMapping("{id}") //
+        public ResponseEntity<?> eliminarPaciente(@PathVariable int id){
+        return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
+        //pacienteService.eliminarPaciente(id)//LE FALTA EL RESPONSE ENTITY STATUS = HttpStatus.OK
+
+    }
+
+
+
+
+    //PUT
+    @PutMapping("/actualizar/${id}")
+    public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
+        return null; //pacienteService.actualizar(paciente)  //LE FALTA EL RESPONSE ENTITY STATUS = HttpStatus.OK
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

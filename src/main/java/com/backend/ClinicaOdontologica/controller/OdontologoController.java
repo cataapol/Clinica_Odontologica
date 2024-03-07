@@ -3,12 +3,11 @@ package com.backend.ClinicaOdontologica.controller;
 import com.backend.ClinicaOdontologica.entity.Odontologo;
 import com.backend.ClinicaOdontologica.service.IOdontologoService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/odontologos")
 
 public class OdontologoController {
@@ -21,56 +20,40 @@ public class OdontologoController {
     }
 
 
-
     //-----------------------
 
-    @PostMapping("/registrarOdontologo")
-    public String registrar(Model model, @RequestBody Odontologo odontologo){
 
-
-        Odontologo paciente1 = odontologoService.registraOdontologo(odontologo);
-
-
-        return "paciente";
-
+    //POST
+    @PostMapping("registrar")
+    public Odontologo registrarOdontologo(@RequestBody Odontologo odontologo) {
+        return odontologoService.registraOdontologo(odontologo);
     }
 
 
-    @GetMapping("/buscarPorId")
-    public String buscarPorID(Model model, @RequestParam int id){ //@RequestParam -> el parametro id esta requerido en la peticion post
-
-        //Nuevo objeto llamando a la capa de Servicio para que  realice la acción del método
-        Odontologo odontologo =  odontologoService.buscarOdontologoPorId(id);
-
-
-        //Enviando INFO a la vista
-        model.addAttribute("nroMatricula", odontologo.getNroMatricula());
-
-
-        return "paciente"; //VISTA ex: paciente.html
-
+    //GET
+    @GetMapping("/odontologoId")
+    public Odontologo buscarOdontologoPorID(@RequestParam int id) {
+        return odontologoService.buscarOdontologoPorId(id);
     }
-
-
-
-
-
-
-
-    //Se espera que model sea utilizado para agregar información relacionada con el paciente antes de mostrarla en la vista.
-
-
-
 
 
     @GetMapping("/buscarTodos")
-    public String listarTodosLosOdontologos(Model model) {
-        List<Odontologo> odontologos = odontologoService.listarTodosLosOdontologos();
-
-        model.addAttribute("odontologos", odontologos);
-
-        return "paciente";
-
+    public List<Odontologo> listarTodosLosPacientes() {
+        return odontologoService.listarTodosLosOdontologos();
     }
-    //----------------------
+
+
+    //DELETE
+    @DeleteMapping("{id}")
+    public void eliminarOdontologo(@PathVariable int id) {
+        //pacienteService.eliminarPaciente(id)
+    }
+
+
+    //PUT
+    @PutMapping("/actualizar/${id}")
+    public Odontologo actualizarPaciente(@RequestBody Odontologo odontologo) {
+        return null; //pacienteService.actualizar(paciente)
+    }
+
 }
