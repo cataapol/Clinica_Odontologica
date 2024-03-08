@@ -4,8 +4,8 @@ package com.backend.ClinicaOdontologica.dao.impl;
 
 import com.backend.ClinicaOdontologica.dao.IDao;
 import com.backend.ClinicaOdontologica.dbconnection.H2Connection;
-import com.backend.ClinicaOdontologica.entity.Domicilio;
-import com.backend.ClinicaOdontologica.entity.Paciente;
+import com.backend.ClinicaOdontologica.model.Domicilio;
+import com.backend.ClinicaOdontologica.model.Paciente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

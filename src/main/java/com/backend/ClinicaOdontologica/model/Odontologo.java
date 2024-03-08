@@ -1,6 +1,4 @@
-package com.backend.ClinicaOdontologica.entity;
-
-import org.springframework.stereotype.Component;
+package com.backend.ClinicaOdontologica.model;
 
 
 public class Odontologo {

@@ -1,8 +1,7 @@
 package com.backend.ClinicaOdontologica.dao.impl;
 
 import com.backend.ClinicaOdontologica.dao.IDao;
-import com.backend.ClinicaOdontologica.entity.Odontologo;
-import com.backend.ClinicaOdontologica.entity.Paciente;
+import com.backend.ClinicaOdontologica.model.Odontologo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

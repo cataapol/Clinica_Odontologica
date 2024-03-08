@@ -3,7 +3,6 @@ package com.backend.ClinicaOdontologica.controller;
 
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
-import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

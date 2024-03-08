@@ -1,4 +1,4 @@
-package com.backend.ClinicaOdontologica.entity;
+package com.backend.ClinicaOdontologica.model;
 
 public class Domicilio {
     private int id;

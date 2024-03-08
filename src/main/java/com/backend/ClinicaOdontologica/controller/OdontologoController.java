@@ -2,12 +2,11 @@ package com.backend.ClinicaOdontologica.controller;
 
 import com.backend.ClinicaOdontologica.dto.entrada.OdontologoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.OdontologoSalidaDto;
-import com.backend.ClinicaOdontologica.entity.Odontologo;
+import com.backend.ClinicaOdontologica.model.Odontologo;
 import com.backend.ClinicaOdontologica.service.IOdontologoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

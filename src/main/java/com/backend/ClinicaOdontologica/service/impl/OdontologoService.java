@@ -4,7 +4,7 @@ package com.backend.ClinicaOdontologica.service.impl;
 import com.backend.ClinicaOdontologica.dao.IDao;
 import com.backend.ClinicaOdontologica.dto.entrada.OdontologoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.OdontologoSalidaDto;
-import com.backend.ClinicaOdontologica.entity.Odontologo;
+import com.backend.ClinicaOdontologica.model.Odontologo;
 import com.backend.ClinicaOdontologica.service.IOdontologoService;
 import org.springframework.stereotype.Service;
 
