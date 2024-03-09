@@ -9,7 +9,7 @@ import com.backend.ClinicaOdontologica.service.impl.PacienteService;
 import java.util.List;
 
 public interface IPacienteService {
-    PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente);
+    PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto);
     List<PacienteSalidaDto> listarPacientes();
     PacienteSalidaDto buscarPorId(int id);
 }
