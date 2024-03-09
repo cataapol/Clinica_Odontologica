@@ -1,4 +1,6 @@
-package com.backend.ClinicaOdontologica.model;
+package com.backend.ClinicaOdontologica.entity;
+
+import com.backend.ClinicaOdontologica.utils.JsonPrinter;
 
 public class Domicilio {
     private int id;
@@ -62,8 +64,5 @@ public class Domicilio {
         this.provincia = provincia;
     }
 
-    @Override
-    public String toString() {
-        return "Id: " + id + " - Calle: " + calle + " - Numero: " + numero + " - Localidad: " + localidad + " - Provincia: " + provincia;
-    }
+
 }

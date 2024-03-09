@@ -3,7 +3,7 @@ package com.backend.ClinicaOdontologica.dao.impl;
 
 import com.backend.ClinicaOdontologica.dao.IDao;
 import com.backend.ClinicaOdontologica.dbconnection.H2Connection;
-import com.backend.ClinicaOdontologica.model.Odontologo;
+import com.backend.ClinicaOdontologica.entity.Odontologo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class OdontologoDAOH2 implements IDao<Odontologo> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setInt(1, odontologo.getNroMatricula());
+            preparedStatement.setString(1, odontologo.getMatricula());
             preparedStatement.setString(2, odontologo.getNombre());
             preparedStatement.setString(3, odontologo.getApellido());
 
@@ -43,7 +43,7 @@ public class OdontologoDAOH2 implements IDao<Odontologo> {
             preparedStatement.execute();
 
 
-            odontologoRegistrado = new Odontologo(odontologo.getNroMatricula(), odontologo.getNombre(), odontologo.getApellido());
+            odontologoRegistrado = new Odontologo(odontologo.getMatricula(), odontologo.getNombre(), odontologo.getApellido());
 
 
 
@@ -206,7 +206,7 @@ public class OdontologoDAOH2 implements IDao<Odontologo> {
 
     private Odontologo crearObjetoOdontologo(ResultSet resultSet) throws SQLException {
 
-        return new Odontologo(resultSet.getInt("matricula"), resultSet.getString("NOMBRE"), resultSet.getString("APELLIDO"));
+        return new Odontologo(resultSet.getString("matricula"), resultSet.getString("NOMBRE"), resultSet.getString("APELLIDO"));
 
 
     }

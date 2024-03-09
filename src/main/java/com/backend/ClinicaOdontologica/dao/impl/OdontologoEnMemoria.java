@@ -1,7 +1,7 @@
 package com.backend.ClinicaOdontologica.dao.impl;
 
 import com.backend.ClinicaOdontologica.dao.IDao;
-import com.backend.ClinicaOdontologica.model.Odontologo;
+import com.backend.ClinicaOdontologica.entity.Odontologo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ public class OdontologoEnMemoria implements IDao<Odontologo> {
     public Odontologo registrar(Odontologo odontologo) {
 
         int id = odontologoRepository.size() + 1;
-        Odontologo odontologoRegistrado = new Odontologo(id, odontologo.getNroMatricula(), odontologo.getNombre(), odontologo.getApellido());
+        Odontologo odontologoRegistrado = new Odontologo(id, odontologo.getMatricula(), odontologo.getNombre(), odontologo.getApellido());
 
         odontologoRepository.add(odontologoRegistrado);
         LOGGER.info("El odontólogo se registró: " + odontologoRegistrado);

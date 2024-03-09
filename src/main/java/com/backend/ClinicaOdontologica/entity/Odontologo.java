@@ -1,4 +1,4 @@
-package com.backend.ClinicaOdontologica.model;
+package com.backend.ClinicaOdontologica.entity;
 
 
 public class Odontologo {
@@ -60,13 +60,5 @@ public class Odontologo {
     }
 
 
-    @Override
-    public String toString() {
-        return "Odontologo{" +
-                "id=" + id +
-                ", matricula=" + matricula +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                '}';
-    }
+
 }
