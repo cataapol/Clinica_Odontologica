@@ -56,7 +56,6 @@ public class PacienteController {
 
 
 
-    //DELETE
     @DeleteMapping("{id}") //
         public ResponseEntity<?> eliminarPaciente(@PathVariable int id){
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
@@ -68,10 +67,10 @@ public class PacienteController {
 
 
     //PUT
-    @PutMapping("/actualizar/${id}")
-    public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
-        return null; //pacienteService.actualizar(paciente)  //LE FALTA EL RESPONSE ENTITY STATUS = HttpStatus.OK
-    }
+    //@PutMapping("/actualizar/${id}")
+    //public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
+    //    return null; //pacienteService.actualizar(paciente)  //LE FALTA EL RESPONSE ENTITY STATUS = HttpStatus.OK
+    //}
 
 
 

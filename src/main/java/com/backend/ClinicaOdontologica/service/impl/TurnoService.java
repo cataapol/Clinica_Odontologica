@@ -12,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,7 @@ public class TurnoService implements ITurnoService {
     public TurnoService(IDao<Turno> turnoIDao, ModelMapper modelMapper) {
         this.turnoIDao = turnoIDao;
         this.modelMapper = modelMapper;
+        configureMapping();
     }
 
 
@@ -87,4 +87,18 @@ public class TurnoService implements ITurnoService {
         LOGGER.info("Listado de todos los turnos: {}", JsonPrinter.toString(turnosSalidaDto));
         return turnosSalidaDto;
     }
+
+
+
+    private void configureMapping(){
+        modelMapper.typeMap(TurnoEntradaDto.class, Turno.class)
+                .addMappings(mapper -> mapper.map(TurnoEntradaDto::getOdontologoEntradaDto, Turno::setOdontologo))  //lambda function (arrow function)
+                .addMappings(mapper -> mapper.map(TurnoEntradaDto::getPacienteEntradaDto, Turno::setPaciente));  //la
+
+
+        modelMapper.typeMap(Turno.class, TurnoSalidaDto.class)
+                .addMappings(mapper -> mapper.map(Turno:: getOdontologo, TurnoSalidaDto::setOdontologoSalidaDto))
+                .addMappings(mapper -> mapper.map(Turno:: getPaciente, TurnoSalidaDto::setPacienteSalidaDto));
+    }
+
 }

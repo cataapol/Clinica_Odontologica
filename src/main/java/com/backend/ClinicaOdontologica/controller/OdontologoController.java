@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/odontologos")
+//@RequestMapping("/odontologos")
 
 public class OdontologoController {
 
@@ -56,10 +56,10 @@ public class OdontologoController {
 
 
     //PUT
-    @PutMapping("/actualizar/${id}")
-    public Odontologo actualizarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo) {
-        return null; //odontologoService.actualizar(odontologo) ResponseEntity status .OK
-    }
+   // @PutMapping("/actualizar/${id}")
+    //public Odontologo actualizarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo) {
+    //    return null; //odontologoService.actualizar(odontologo) ResponseEntity status .OK
+    //}
 
 
 }
