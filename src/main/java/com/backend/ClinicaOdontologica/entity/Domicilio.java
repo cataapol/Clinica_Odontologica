@@ -1,13 +1,25 @@
 package com.backend.ClinicaOdontologica.entity;
 
-import com.backend.ClinicaOdontologica.utils.JsonPrinter;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name = "DOMICILIOS")
 public class Domicilio {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String calle;
     private int numero;
     private String localidad;
     private String provincia;
+
+
+    //CASCADE
+    @OneToOne(mappedBy = "domicilio", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private Paciente paciente;
 
     public Domicilio(int id, String calle, int numero, String localidad, String provincia) {
         this.id = id;

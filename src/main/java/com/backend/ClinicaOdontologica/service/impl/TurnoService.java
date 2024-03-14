@@ -2,9 +2,7 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 import com.backend.ClinicaOdontologica.dao.IDao;
 import com.backend.ClinicaOdontologica.dto.entrada.TurnoEntradaDto;
-import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.dto.salida.TurnoSalidaDto;
-import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.entity.Turno;
 import com.backend.ClinicaOdontologica.service.ITurnoService;
 import com.backend.ClinicaOdontologica.utils.JsonPrinter;

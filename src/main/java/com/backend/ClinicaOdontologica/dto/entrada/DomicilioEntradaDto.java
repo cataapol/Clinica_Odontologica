@@ -1,7 +1,7 @@
 package com.backend.ClinicaOdontologica.dto.entrada;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.validation.constraints.*;
+import javax.validation.constraints.*;
 
 @JsonIgnoreProperties() //Ignorar datos recibidos por json que no se pueden mappear
 

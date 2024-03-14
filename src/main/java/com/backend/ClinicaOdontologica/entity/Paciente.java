@@ -1,17 +1,26 @@
 package com.backend.ClinicaOdontologica.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
-
-
+@Entity
+@Table(name = "PACIENTES")
 public class Paciente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nombre;
     private String apellido;
     private int dni;
     private LocalDate fechaIngreso;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
+
 
 
     public Paciente(int id, String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {

@@ -1,8 +1,5 @@
 package com.backend.ClinicaOdontologica.dto.salida;
 
-import com.backend.ClinicaOdontologica.entity.Odontologo;
-import com.backend.ClinicaOdontologica.entity.Paciente;
-
 import java.time.LocalDateTime;
 
 public class TurnoSalidaDto {

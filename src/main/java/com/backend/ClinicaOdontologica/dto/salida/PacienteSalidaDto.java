@@ -1,7 +1,5 @@
 package com.backend.ClinicaOdontologica.dto.salida;
 
-import com.backend.ClinicaOdontologica.dto.entrada.DomicilioEntradaDto;
-
 import java.time.LocalDate;
 
 public class PacienteSalidaDto {
