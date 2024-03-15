@@ -1,10 +1,10 @@
 package com.backend.ClinicaOdontologica.service.impl;
 
 
-import com.backend.ClinicaOdontologica.dao.IDao;
 import com.backend.ClinicaOdontologica.dto.entrada.OdontologoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.OdontologoSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Odontologo;
+import com.backend.ClinicaOdontologica.repository.IOdontologoRepository;
 import com.backend.ClinicaOdontologica.service.IOdontologoService;
 import com.backend.ClinicaOdontologica.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
@@ -19,16 +19,15 @@ import java.util.List;
 public class OdontologoService implements IOdontologoService {
 
     Logger LOGGER = LoggerFactory.getLogger(OdontologoService.class);
-    private IDao<Odontologo> odontologoIDao;
+    private IOdontologoRepository odontologoRepository;
 
     private ModelMapper modelMapper;
 
 
-    public OdontologoService(IDao<Odontologo> odontologoIDao, ModelMapper modelMapper) {
-        this.odontologoIDao = odontologoIDao;
+    public OdontologoService(IOdontologoRepository odontologoRepository, ModelMapper modelMapper) {
+        this.odontologoRepository = odontologoRepository;
         this.modelMapper = modelMapper;
     }
-
 
     @Override
     public OdontologoSalidaDto registraOdontologo(OdontologoEntradaDto odontologoEntradaDto) {
@@ -37,7 +36,7 @@ public class OdontologoService implements IOdontologoService {
 
         Odontologo odontologoEntity = modelMapper.map(odontologoEntradaDto, Odontologo.class);
 
-        Odontologo odontologoConId = odontologoIDao.registrar(odontologoEntity);
+        Odontologo odontologoConId = odontologoRepository.save(odontologoEntity);
 
         OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoConId, OdontologoSalidaDto.class);
 
@@ -51,7 +50,7 @@ public class OdontologoService implements IOdontologoService {
     @Override
     public List<OdontologoSalidaDto> listarTodosLosOdontologos() {
 
-        List<Odontologo> odontologos = odontologoIDao.listarTodos();
+        List<Odontologo> odontologos = odontologoRepository.findAll();
         List<OdontologoSalidaDto> odontologosSalidaDto = new ArrayList<>();
 
         for (Odontologo odontologo : odontologos) {
@@ -67,9 +66,9 @@ public class OdontologoService implements IOdontologoService {
 
 
     @Override
-    public OdontologoSalidaDto buscarOdontologoPorId(int id) {
+    public OdontologoSalidaDto buscarOdontologoPorId(Long id) {
 
-        Odontologo odontologoBuscado = odontologoIDao.buscarPorId(id);
+        Odontologo odontologoBuscado = odontologoRepository.findById(id).orElse(null);
 
         OdontologoSalidaDto odontologoEncontrado = null;
 

@@ -9,7 +9,7 @@ public interface IOdontologoService{
 
     OdontologoSalidaDto registraOdontologo(OdontologoEntradaDto odontologo);
 
-    OdontologoSalidaDto buscarOdontologoPorId(int id);
+    OdontologoSalidaDto buscarOdontologoPorId(Long id);
 
     List<OdontologoSalidaDto> listarTodosLosOdontologos();
 

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.*;
 
 @JsonIgnoreProperties() //Ignorar datos recibidos por json que no se pueden mappear
-
 public class DomicilioEntradaDto {
 
     @NotNull(message = "La calle no puede ser nula")

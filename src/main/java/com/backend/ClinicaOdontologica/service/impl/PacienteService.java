@@ -2,10 +2,11 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 
 
-import com.backend.ClinicaOdontologica.dao.IDao;
+
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Paciente;
+import com.backend.ClinicaOdontologica.repository.IPacienteRepository;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
 import com.backend.ClinicaOdontologica.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
@@ -23,19 +24,18 @@ public class PacienteService implements IPacienteService {
     private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
 
 
-    private IDao<Paciente> pacienteIDao;
+    private IPacienteRepository pacienteRepository;
 
     private ModelMapper modelMapper;
 
 
 
-
     @Autowired
-    public PacienteService(IDao<Paciente> pacienteIDao, ModelMapper modelMapper) {
-        this.pacienteIDao = pacienteIDao;
+    public PacienteService(IPacienteRepository pacienteRepository, ModelMapper modelMapper) {
+        this.pacienteRepository = pacienteRepository;
         this.modelMapper = modelMapper;
-        configureMapping(); //Se llama al metodo
     }
+
 
     //--------------------------------
 
@@ -49,7 +49,7 @@ public class PacienteService implements IPacienteService {
         Paciente pacienteEntity = modelMapper.map(pacienteEntradaDto, Paciente.class);
 
         //Ejecucion del metodo y obtencion del ID
-        Paciente pacienteEntityConId = pacienteIDao.registrar(pacienteEntity);
+        Paciente pacienteEntityConId = pacienteRepository.save(pacienteEntity);
 
         //Pasando la entidad CON ID a PacienteSalidaDto
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteEntityConId, PacienteSalidaDto.class);
@@ -63,16 +63,9 @@ public class PacienteService implements IPacienteService {
     @Override
     public List<PacienteSalidaDto> listarPacientes() {
 
-        //FORMA NRO 1
-        //List<PacienteSalidaDto> pacientes = pacienteIDao.listarTodos()
-        //        .stream()
-        //        .map(paciente -> modelMapper.map(paciente, PacienteSalidaDto.class))
-        //        .toList();
-
-
         //FORMA NRO DOS
         //Almacenamiento de list con ejecucion de metodo
-        List<Paciente> pacientes = pacienteIDao.listarTodos();
+        List<Paciente> pacientes = pacienteRepository.findAll();
 
         //ArrayList de tipo pacienteSalidaDto
         List<PacienteSalidaDto> pacientesSalidaDto = new ArrayList<>();
@@ -89,9 +82,9 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public PacienteSalidaDto buscarPorId(int id) {
+    public PacienteSalidaDto buscarPorId(Long id) {
 
-        Paciente pacienteBuscadoEntity = pacienteIDao.buscarPorId(id);
+        Paciente pacienteBuscadoEntity = pacienteRepository.findById(id).orElse(null); //Optional -> nullable
 
         PacienteSalidaDto pacienteEncontrado = null;
 

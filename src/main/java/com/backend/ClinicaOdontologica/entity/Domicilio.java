@@ -20,12 +20,6 @@ public class Domicilio {
     private String provincia;
 
 
-    //CASCADE
-    @OneToOne(mappedBy = "domicilio", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    private Paciente paciente;
-
-
 
 
     public Domicilio() {

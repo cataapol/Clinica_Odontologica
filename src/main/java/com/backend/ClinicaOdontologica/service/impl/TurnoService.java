@@ -1,9 +1,10 @@
 package com.backend.ClinicaOdontologica.service.impl;
 
-import com.backend.ClinicaOdontologica.dao.IDao;
+
 import com.backend.ClinicaOdontologica.dto.entrada.TurnoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.TurnoSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Turno;
+import com.backend.ClinicaOdontologica.repository.ITurnoRepository;
 import com.backend.ClinicaOdontologica.service.ITurnoService;
 import com.backend.ClinicaOdontologica.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
@@ -17,18 +18,15 @@ public class TurnoService implements ITurnoService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
 
-    private IDao<Turno> turnoIDao;
+    private ITurnoRepository turnoRepository;
 
     private ModelMapper modelMapper;
 
-    public TurnoService(IDao<Turno> turnoIDao, ModelMapper modelMapper) {
-        this.turnoIDao = turnoIDao;
+
+    public TurnoService(ITurnoRepository turnoRepository, ModelMapper modelMapper) {
+        this.turnoRepository = turnoRepository;
         this.modelMapper = modelMapper;
-        configureMapping();
     }
-
-
-
 
     @Override
     public TurnoSalidaDto registrar(TurnoEntradaDto turnoEntradaDto) {
@@ -36,7 +34,7 @@ public class TurnoService implements ITurnoService {
 
         Turno turnoEntity = modelMapper.map(turnoEntradaDto, Turno.class);
 
-        Turno turnoID = turnoIDao.registrar(turnoEntity);
+        Turno turnoID = turnoRepository.save(turnoEntity);
 
         TurnoSalidaDto turnoSalidaDto = modelMapper.map(turnoID, TurnoSalidaDto.class);
 
@@ -48,8 +46,8 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public TurnoSalidaDto buscarPorId(int id) {
-        Turno turnoEntity = turnoIDao.buscarPorId(id);
+    public TurnoSalidaDto buscarPorId(Long id) {
+        Turno turnoEntity = turnoRepository.findById(id).orElse(null);
 
         TurnoSalidaDto turnoEncontrado = null;
 
@@ -70,7 +68,7 @@ public class TurnoService implements ITurnoService {
     @Override
     public List<TurnoSalidaDto> listarTodos() {
         //Ejecucion de metodo
-        List<Turno> turnos = turnoIDao.listarTodos();
+        List<Turno> turnos = turnoRepository.findAll();
 
         //ArrayList de tipo dto
         List<TurnoSalidaDto> turnosSalidaDto = new ArrayList<>();
@@ -90,8 +88,8 @@ public class TurnoService implements ITurnoService {
 
     private void configureMapping(){
         modelMapper.typeMap(TurnoEntradaDto.class, Turno.class)
-                .addMappings(mapper -> mapper.map(TurnoEntradaDto::getOdontologoEntradaDto, Turno::setOdontologo))  //lambda function (arrow function)
-                .addMappings(mapper -> mapper.map(TurnoEntradaDto::getPacienteEntradaDto, Turno::setPaciente));  //la
+                .addMappings(mapper -> mapper.map(TurnoEntradaDto::getOdontologoId, Turno::setOdontologo))  //lambda function (arrow function)
+                .addMappings(mapper -> mapper.map(TurnoEntradaDto::getPacienteId, Turno::setPaciente));  //la
 
 
         modelMapper.typeMap(Turno.class, TurnoSalidaDto.class)

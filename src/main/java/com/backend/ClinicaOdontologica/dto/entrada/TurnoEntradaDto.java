@@ -10,11 +10,9 @@ public class TurnoEntradaDto {
 
 
     @NotNull(message = "El odontologo asignado al turno no puede ser nulo")
-    @Valid
     private Long OdontologoId;
 
     @NotNull(message = "El paciente asignado al turno no puede ser nulo")
-    @Valid
     private Long PacienteId;
 
     @FutureOrPresent( message = "La fecha del turno no puede ser previa al dia de hoy.")

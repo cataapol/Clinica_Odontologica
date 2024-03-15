@@ -9,7 +9,7 @@ public interface ITurnoService {
 
     TurnoSalidaDto registrar(TurnoEntradaDto turnoEntradaDto);
 
-    TurnoSalidaDto buscarPorId(int id);
+    TurnoSalidaDto buscarPorId(Long id);
 
     List<TurnoSalidaDto> listarTodos();
 
