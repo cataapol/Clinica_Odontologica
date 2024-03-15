@@ -1,6 +1,7 @@
 package com.backend.ClinicaOdontologica.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ODONTOLOGOS")
@@ -8,7 +9,7 @@ public class Odontologo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     private String matricula;
 
@@ -17,7 +18,7 @@ public class Odontologo {
     private String apellido;
 
 
-    public Odontologo(int id, String matricula, String nombre, String apellido) {
+    public Odontologo(Long id, String matricula, String nombre, String apellido) {
         this.id = id;
         this.matricula = matricula;
         this.nombre = nombre;
@@ -32,11 +33,11 @@ public class Odontologo {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

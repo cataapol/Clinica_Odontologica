@@ -8,13 +8,13 @@ public class Turno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "odontologo_id")
     private Odontologo odontologo;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
@@ -24,7 +24,7 @@ public class Turno {
     public Turno() {
     }
 
-    public Turno(int id, Odontologo odontologo, Paciente paciente, LocalDateTime fechaYHora) {
+    public Turno(Long id, Odontologo odontologo, Paciente paciente, LocalDateTime fechaYHora) {
         this.id = id;
         this.odontologo = odontologo;
         this.paciente = paciente;
@@ -33,11 +33,11 @@ public class Turno {
 
 
 //-------------------------------------------
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -3,7 +3,7 @@ package com.backend.ClinicaOdontologica.dto.salida;
 import java.time.LocalDateTime;
 
 public class TurnoSalidaDto {
-    private int id;
+    private Long id;
 
     private OdontologoSalidaDto odontologoSalidaDto;
 
@@ -15,18 +15,18 @@ public class TurnoSalidaDto {
     public TurnoSalidaDto() {
     }
 
-    public TurnoSalidaDto(int id, OdontologoSalidaDto odontologoSalidaDto, PacienteSalidaDto pacienteSalidaDto, LocalDateTime fechaYHora) {
+    public TurnoSalidaDto(Long id, OdontologoSalidaDto odontologoSalidaDto, PacienteSalidaDto pacienteSalidaDto, LocalDateTime fechaYHora) {
         this.id = id;
         this.odontologoSalidaDto = odontologoSalidaDto;
         this.pacienteSalidaDto = pacienteSalidaDto;
         this.fechaYHora = fechaYHora;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
