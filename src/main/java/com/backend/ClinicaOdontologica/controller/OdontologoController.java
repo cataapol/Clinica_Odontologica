@@ -35,7 +35,7 @@ public class OdontologoController {
 
     //GET
     @GetMapping("/odontologoId")
-    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorID(@RequestParam int id) {
+    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorID(@RequestParam Long id) {
         return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
     }
 
