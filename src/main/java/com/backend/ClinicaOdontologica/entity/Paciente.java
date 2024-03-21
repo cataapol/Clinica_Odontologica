@@ -1,5 +1,7 @@
 package com.backend.ClinicaOdontologica.entity;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -12,6 +14,7 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     @Column(length = 50)
     private String nombre;
     @Column(length = 50)
@@ -19,9 +22,10 @@ public class Paciente {
 
     @Column(length = 50)
     private int dni;
+
     private LocalDate fechaIngreso;
 
-    @OneToOne(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 

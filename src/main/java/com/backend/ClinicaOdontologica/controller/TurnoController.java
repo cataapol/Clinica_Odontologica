@@ -29,7 +29,7 @@ public class TurnoController {
     }
 
     @GetMapping("/turnoId")
-    public ResponseEntity<TurnoSalidaDto> buscarPorId(@RequestParam int id){
+    public ResponseEntity<TurnoSalidaDto> buscarPorId(@RequestParam Long id){
         return new ResponseEntity<>(turnoService.buscarPorId(id), HttpStatus.OK);
     }
 

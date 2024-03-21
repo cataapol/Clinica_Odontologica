@@ -6,6 +6,8 @@ package com.backend.ClinicaOdontologica.service.impl;
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Paciente;
+import com.backend.ClinicaOdontologica.exception.BadRequestException;
+import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.backend.ClinicaOdontologica.repository.IPacienteRepository;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
 import com.backend.ClinicaOdontologica.utils.JsonPrinter;
@@ -42,6 +44,8 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto) {
+
+
         //Log de los datos recibidos
         LOGGER.info("PacienteEntradaDto: {}", JsonPrinter.toString(pacienteEntradaDto));
 
@@ -101,7 +105,17 @@ public class PacienteService implements IPacienteService {
     }
 
 
+    @Override
+    public void eliminarPacientePorId(Long id) throws ResourceNotFoundException {
 
+        if (buscarPorId(id) != null) {
+            pacienteRepository.deleteAllById(id);
+            LOGGER.warn("Paciente eliminado {} ",  id);
+        } else {
+            LOGGER.error("No se ha encontrado el paciente {} ",  id);
+            throw new ResourceNotFoundException("No existe registro de paciente con id {}" + id);
+        }
+    }
 
     private void configureMapping() {
         modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)

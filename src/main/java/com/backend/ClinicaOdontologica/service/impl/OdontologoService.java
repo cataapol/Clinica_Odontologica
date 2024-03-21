@@ -38,6 +38,8 @@ public class OdontologoService implements IOdontologoService {
 
         Odontologo odontologoConId = odontologoRepository.save(odontologoEntity);
 
+
+
         OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoConId, OdontologoSalidaDto.class);
 
         LOGGER.info("Se creó un nuevo odontólogo: {}", JsonPrinter.toString(odontologoSalidaDto));
