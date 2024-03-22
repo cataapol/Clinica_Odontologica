@@ -3,6 +3,7 @@ package com.backend.ClinicaOdontologica.controller;
 
 import com.backend.ClinicaOdontologica.dto.entrada.TurnoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.TurnoSalidaDto;
+import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.service.ITurnoService;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class TurnoController {
 
 
     @PostMapping("registrar")
-    public ResponseEntity<TurnoSalidaDto> registrar(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto){
+    public ResponseEntity<TurnoSalidaDto> registrar(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto)throws BadRequestException {
         return new ResponseEntity<>(turnoService.registrar(turnoEntradaDto), HttpStatus.CREATED);
     }
 

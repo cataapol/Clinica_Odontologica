@@ -23,6 +23,7 @@ public class Paciente {
     @Column(length = 50)
     private int dni;
 
+
     private LocalDate fechaIngreso;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

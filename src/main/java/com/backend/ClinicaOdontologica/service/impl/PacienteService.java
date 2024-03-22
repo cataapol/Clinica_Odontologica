@@ -6,7 +6,6 @@ package com.backend.ClinicaOdontologica.service.impl;
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Paciente;
-import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.backend.ClinicaOdontologica.repository.IPacienteRepository;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
@@ -60,6 +59,7 @@ public class PacienteService implements IPacienteService {
 
         LOGGER.info("PacienteSalidaDto: {}", JsonPrinter.toString(pacienteSalidaDto));
         return pacienteSalidaDto;
+
 
     }
 

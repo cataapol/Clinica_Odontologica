@@ -55,7 +55,7 @@ public class TurnoService implements ITurnoService {
 
             if(odontologo == null && paciente == null) {
                 LOGGER.error("No existe el paciente ni el dontólogo, no se pudo crear el turno ");
-                throw new BadRequestException("No se pudo crear el turno, no existe el paciente ni el odontólogo:  ");
+                throw new BadRequestException("No se pudo crear el turno, no existe el paciente ni el odontólogo  ");
 
             } else if(paciente == null){
 
