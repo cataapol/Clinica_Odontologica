@@ -32,7 +32,7 @@ public class PacienteController {
 
 
     //POST
-    @PostMapping("registrar")
+    @PostMapping("/registrar")
     public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente) throws BadRequestException {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
@@ -68,10 +68,10 @@ public class PacienteController {
 
 
     //PUT
-    //@PutMapping("/actualizar/${id}")
-    //public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
-    //    return null; //pacienteService.actualizar(paciente)  //LE FALTA EL RESPONSE ENTITY STATUS = HttpStatus.OK
-    //}
+    @PutMapping("/actualizar/${id}")
+    public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto pacienteEntradaDto, @RequestParam Long id) throws ResourceNotFoundException {
+       return new ResponseEntity<>( pacienteService.modificarPaciente(pacienteEntradaDto, id), HttpStatus.CREATED);
+    }
 
 
 

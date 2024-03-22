@@ -3,6 +3,8 @@ package com.backend.ClinicaOdontologica.service;
 import com.backend.ClinicaOdontologica.dto.entrada.TurnoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.TurnoSalidaDto;
 import com.backend.ClinicaOdontologica.exception.BadRequestException;
+import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ public interface ITurnoService {
 
     List<TurnoSalidaDto> listarTodos();
 
-    void eliminarTurno(Long id);
+    void eliminarTurno(Long id) throws ResourceNotFoundException;
 
+
+    TurnoSalidaDto modificarTurno(TurnoEntradaDto turnoEntradaDto, Long id) throws ResourceNotFoundException;
 }

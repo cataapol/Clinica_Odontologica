@@ -41,7 +41,7 @@ function registrarPaciente() {
 
 
     // URL API
-    const apiPacienteRegistro = 'http://localhost:8080/pacientes/registrarPaciente';
+    const apiPacienteRegistro = 'http//localhost:8080/pacientes/registrar';
 
     fetch(apiPacienteRegistro, configuraciones)
         .then((respuesta) => respuesta.json())
