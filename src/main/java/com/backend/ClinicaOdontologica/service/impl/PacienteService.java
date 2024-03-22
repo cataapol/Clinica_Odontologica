@@ -5,7 +5,6 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
-import com.backend.ClinicaOdontologica.entity.Domicilio;
 import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.backend.ClinicaOdontologica.repository.IPacienteRepository;
@@ -107,20 +106,20 @@ public class PacienteService implements IPacienteService {
 
 
     @Override
-    public void eliminarPacientePorId(Long id) throws ResourceNotFoundException {
+    public void eliminarPacientePorId(Long id){
 
         if (buscarPorId(id) != null) {
             pacienteRepository.deleteAllById(id);
             LOGGER.warn("Paciente eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el paciente {} ",  id);
-            throw new ResourceNotFoundException("No existe registro de paciente con id {}" + id);
+            //throw new ResourceNotFoundException("No existe registro de paciente con id {}" + id);
         }
     }
 
 
     @Override
-    public PacienteSalidaDto modificarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) throws ResourceNotFoundException {
+    public PacienteSalidaDto modificarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) {
         Paciente pacienteRecibido = modelMapper.map(pacienteEntradaDto, Paciente.class);
         Paciente pacienteActualizado = pacienteRepository.findById(id).orElse(null);
 
@@ -142,7 +141,7 @@ public class PacienteService implements IPacienteService {
 
         } else {
             LOGGER.error("No fue posible actualizar el paciente ya que el mismo no existe");
-            throw new ResourceNotFoundException("No es posible actualizar el paciente ya que no se encuentra en nuestra base de datos. (Paciente " + id + " )");
+            //throw new ResourceNotFoundException("No es posible actualizar el paciente ya que no se encuentra en nuestra base de datos. (Paciente " + id + " )");
         }
 
 

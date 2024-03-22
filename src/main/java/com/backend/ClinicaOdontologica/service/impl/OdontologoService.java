@@ -90,13 +90,13 @@ public class OdontologoService implements IOdontologoService {
 
 
     @Override
-    public void eliminarOdontologoPorId(Long id) throws ResourceNotFoundException {
+    public void eliminarOdontologoPorId(Long id)  {
         if (buscarOdontologoPorId(id) != null) {
             odontologoRepository.deleteAllById(id);
             LOGGER.warn("Odontologo eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el odontologo {} ",  id);
-            throw new ResourceNotFoundException("No existe registro de odontologo con id {}" + id);
+            //throw new ResourceNotFoundException("No existe registro de odontologo con id {}" + id);
         }
     }
 

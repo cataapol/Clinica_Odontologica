@@ -14,10 +14,12 @@ import com.backend.ClinicaOdontologica.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TurnoService implements ITurnoService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
@@ -120,19 +122,19 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public void eliminarTurno(Long id)throws ResourceNotFoundException {
+    public void eliminarTurno(Long id) {
         if (buscarPorId(id) != null) {
             turnoRepository.deleteAllById(id);
             LOGGER.warn("Turno eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el turno {} ",  id);
-            throw new ResourceNotFoundException("No existe registro de turno con el id {}" + id);
+            //throw new ResourceNotFoundException("No existe registro de turno con el id {}" + id);
         }
 
     }
 
     @Override
-    public TurnoSalidaDto modificarTurno(TurnoEntradaDto turnoEntradaDto, Long id) throws ResourceNotFoundException {
+    public TurnoSalidaDto modificarTurno(TurnoEntradaDto turnoEntradaDto, Long id) {
         Turno turnoRecibido = modelMapper.map(turnoEntradaDto, Turno.class);
         Turno turnoAActualizar = turnoRepository.findById(id).orElse(null);
         TurnoSalidaDto turnoSalidaDto = null;
