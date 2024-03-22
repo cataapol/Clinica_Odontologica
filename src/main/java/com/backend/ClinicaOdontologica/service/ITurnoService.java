@@ -4,7 +4,6 @@ import com.backend.ClinicaOdontologica.dto.entrada.TurnoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.TurnoSalidaDto;
 import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
