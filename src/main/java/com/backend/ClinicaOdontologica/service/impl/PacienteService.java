@@ -3,9 +3,11 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 
 
+import com.backend.ClinicaOdontologica.dto.entrada.DomicilioEntradaDto;
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Paciente;
+import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.backend.ClinicaOdontologica.repository.IPacienteRepository;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
@@ -42,25 +44,25 @@ public class PacienteService implements IPacienteService {
 
 
     @Override
-    public PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto) {
+    public PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto) throws BadRequestException {
 
+        PacienteSalidaDto pacienteSalidaDto;
 
-        //Log de los datos recibidos
-        LOGGER.info("PacienteEntradaDto: {}", JsonPrinter.toString(pacienteEntradaDto));
+        DomicilioEntradaDto domicilio = pacienteEntradaDto.getDomicilioEntradaDto();
 
-        //Mapping de pacienteEntradaDto a Paciente.class para poder mandar a capa de persistencia
-        Paciente pacienteEntity = modelMapper.map(pacienteEntradaDto, Paciente.class);
+        if(domicilio!= null){
+            Paciente pacienteRegistrado = pacienteRepository.save(modelMapper.map(pacienteEntradaDto, Paciente.class));
+            pacienteSalidaDto = modelMapper.map(pacienteRegistrado, PacienteSalidaDto.class);
 
-        //Ejecucion del metodo y obtencion del ID
-        Paciente pacienteEntityConId = pacienteRepository.save(pacienteEntity);
+            LOGGER.info("Paciente registrado correctamente! {} ", pacienteRegistrado);
 
-        //Pasando la entidad CON ID a PacienteSalidaDto
-        PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteEntityConId, PacienteSalidaDto.class);
+        } else {
+            LOGGER.error("No existe domicilio, no se pudo crear el paciente ");
+            throw new BadRequestException("No se pudo crear el paciente, no existe el domicilio");
 
-        LOGGER.info("PacienteSalidaDto: {}", JsonPrinter.toString(pacienteSalidaDto));
+        }
+
         return pacienteSalidaDto;
-
-
     }
 
 
@@ -106,20 +108,20 @@ public class PacienteService implements IPacienteService {
 
 
     @Override
-    public void eliminarPacientePorId(Long id){
+    public void eliminarPacientePorId(Long id) throws ResourceNotFoundException {
 
         if (buscarPorId(id) != null) {
             pacienteRepository.deleteAllById(id);
             LOGGER.warn("Paciente eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el paciente {} ",  id);
-            //throw new ResourceNotFoundException("No existe registro de paciente con id {}" + id);
+            throw new ResourceNotFoundException("No existe registro de paciente con id {}" + id);
         }
     }
 
 
     @Override
-    public PacienteSalidaDto modificarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) {
+    public PacienteSalidaDto modificarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) throws ResourceNotFoundException {
         Paciente pacienteRecibido = modelMapper.map(pacienteEntradaDto, Paciente.class);
         Paciente pacienteActualizado = pacienteRepository.findById(id).orElse(null);
 
@@ -141,7 +143,7 @@ public class PacienteService implements IPacienteService {
 
         } else {
             LOGGER.error("No fue posible actualizar el paciente ya que el mismo no existe");
-            //throw new ResourceNotFoundException("No es posible actualizar el paciente ya que no se encuentra en nuestra base de datos. (Paciente " + id + " )");
+            throw new ResourceNotFoundException("No es posible actualizar el paciente ya que no se encuentra en nuestra base de datos. (Paciente " + id + " )");
         }
 
 
@@ -161,7 +163,6 @@ public class PacienteService implements IPacienteService {
         modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)
                 .addMappings(mapper -> mapper.map(Paciente:: getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));
     }
-
 
 
 }

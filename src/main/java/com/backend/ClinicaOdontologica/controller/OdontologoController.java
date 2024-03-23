@@ -30,7 +30,7 @@ public class OdontologoController {
 
     //POST
     @PostMapping("registrar")
-    public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo) {
+    public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo) throws BadRequestException{
         return new ResponseEntity<>(odontologoService.registraOdontologo(odontologo), HttpStatus.CREATED);
     }
 
@@ -50,7 +50,7 @@ public class OdontologoController {
 
     //DELETE
     @DeleteMapping("{id}")
-    public ResponseEntity<?> eliminarOdontologo(@PathVariable Long id){
+    public ResponseEntity<?> eliminarOdontologo(@PathVariable Long id) throws ResourceNotFoundException{
         odontologoService.eliminarOdontologoPorId(id);
         return new ResponseEntity<>("Odontologo eliminado correctamente", HttpStatus.NO_CONTENT);
     }

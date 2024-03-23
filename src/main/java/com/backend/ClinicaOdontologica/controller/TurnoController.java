@@ -1,9 +1,8 @@
 package com.backend.ClinicaOdontologica.controller;
 
 
-import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
+
 import com.backend.ClinicaOdontologica.dto.entrada.TurnoEntradaDto;
-import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
 import com.backend.ClinicaOdontologica.dto.salida.TurnoSalidaDto;
 import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
@@ -46,7 +45,7 @@ public class TurnoController {
 
 
     @DeleteMapping("/eliminarTurno")
-    public ResponseEntity<?> eliminarTurnoPorId(@PathVariable Long id) {
+    public ResponseEntity<?> eliminarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
         turnoService.eliminarTurno(id);
         return new ResponseEntity<>("Turno eliminado correctamente", HttpStatus.NO_CONTENT);
     }

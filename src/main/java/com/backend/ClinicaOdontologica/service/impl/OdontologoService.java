@@ -4,7 +4,6 @@ package com.backend.ClinicaOdontologica.service.impl;
 import com.backend.ClinicaOdontologica.dto.entrada.OdontologoEntradaDto;
 import com.backend.ClinicaOdontologica.dto.salida.OdontologoSalidaDto;
 import com.backend.ClinicaOdontologica.entity.Odontologo;
-import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.backend.ClinicaOdontologica.repository.IOdontologoRepository;
 import com.backend.ClinicaOdontologica.service.IOdontologoService;
@@ -90,18 +89,20 @@ public class OdontologoService implements IOdontologoService {
 
 
     @Override
-    public void eliminarOdontologoPorId(Long id)  {
+    public void eliminarOdontologoPorId(Long id)  throws ResourceNotFoundException {
+
         if (buscarOdontologoPorId(id) != null) {
             odontologoRepository.deleteAllById(id);
             LOGGER.warn("Odontologo eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el odontologo {} ",  id);
-            //throw new ResourceNotFoundException("No existe registro de odontologo con id {}" + id);
+            throw new ResourceNotFoundException("No existe registro de odontologo con id {}" + id);
         }
+
     }
 
     @Override
-    public OdontologoSalidaDto modificarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id) {
+    public OdontologoSalidaDto modificarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException {
         Odontologo odontologoRecibido = modelMapper.map(odontologoEntradaDto, Odontologo.class);
         Odontologo odontologoAActualizar = odontologoRepository.findById(id).orElse(null);
         OdontologoSalidaDto odontologoSalidaDto = null;
@@ -119,6 +120,7 @@ public class OdontologoService implements IOdontologoService {
 
         } else {
             LOGGER.error("No fue posible actualizar los datos ya que el odontologo no se encuentra registrado");
+            throw new ResourceNotFoundException("No fue posible actualizar los datos ya que el odontologo no se encuentra registrado");
 
         }
 

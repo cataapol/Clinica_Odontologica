@@ -122,19 +122,20 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public void eliminarTurno(Long id) {
+    public void eliminarTurno(Long id) throws ResourceNotFoundException{
+
         if (buscarPorId(id) != null) {
             turnoRepository.deleteAllById(id);
             LOGGER.warn("Turno eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el turno {} ",  id);
-            //throw new ResourceNotFoundException("No existe registro de turno con el id {}" + id);
+            throw new ResourceNotFoundException("No existe registro de turno con el id {}" + id);
         }
 
     }
 
     @Override
-    public TurnoSalidaDto modificarTurno(TurnoEntradaDto turnoEntradaDto, Long id) {
+    public TurnoSalidaDto modificarTurno(TurnoEntradaDto turnoEntradaDto, Long id) throws ResourceNotFoundException {
         Turno turnoRecibido = modelMapper.map(turnoEntradaDto, Turno.class);
         Turno turnoAActualizar = turnoRepository.findById(id).orElse(null);
         TurnoSalidaDto turnoSalidaDto = null;
@@ -151,7 +152,7 @@ public class TurnoService implements ITurnoService {
 
         } else {
             LOGGER.error("No fue posible actualizar los datos ya que el turno no se encuentra registrado");
-            //EXC
+            throw new ResourceNotFoundException("No fue posible actualizar los datos ya que el turno no se encuentra registrado");
         }
 
         return turnoSalidaDto;

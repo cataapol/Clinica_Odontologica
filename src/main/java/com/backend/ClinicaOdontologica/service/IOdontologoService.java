@@ -14,7 +14,7 @@ public interface IOdontologoService{
 
     List<OdontologoSalidaDto> listarTodosLosOdontologos();
 
-    void eliminarOdontologoPorId(Long id);
+    void eliminarOdontologoPorId(Long id) throws ResourceNotFoundException;
 
     OdontologoSalidaDto modificarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException;
 
