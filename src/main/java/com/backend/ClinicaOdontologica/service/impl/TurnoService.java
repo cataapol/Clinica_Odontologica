@@ -45,7 +45,7 @@ public class TurnoService implements ITurnoService {
 
         TurnoSalidaDto turnoSalidaDto;
 
-        //Se inicializan pacienteSalidaDto y OdontologoSalidaDto para obtener sus respectivos id's para turnoEntradaDto.
+
         PacienteSalidaDto paciente = pacienteService.buscarPorId(turnoEntradaDto.getPacienteId());
         OdontologoSalidaDto odontologo = odontologoService.buscarOdontologoPorId(turnoEntradaDto.getOdontologoId());
 
@@ -103,17 +103,17 @@ public class TurnoService implements ITurnoService {
 
     @Override
     public List<TurnoSalidaDto> listarTodos() {
-        //Ejecucion de metodo
+
         List<Turno> turnos = turnoRepository.findAll();
 
-        //ArrayList de tipo dto
+
         List<TurnoSalidaDto> turnosSalidaDto = new ArrayList<>();
 
-        //Iteramos sobre turnos
+
         for (Turno turno: turnos) {
-            //Se cambia tipo de dato de Entity (paciente) a SalidaDTO
+
             TurnoSalidaDto turnoSalidaDto = modelMapper.map(turno, TurnoSalidaDto.class);
-            //Se añade a la lista de salidaDto los resultados "parseados"
+
             turnosSalidaDto.add(turnoSalidaDto);
         }
         LOGGER.info("Listado de todos los turnos: {}", JsonPrinter.toString(turnosSalidaDto));
@@ -174,7 +174,6 @@ public class TurnoService implements ITurnoService {
 
 
 
-    //Al ser el id el que establece la conexión, JPA reconoce el tipo de dato, por lo que no es necesario un configure mapping
     private TurnoSalidaDto entidadASalidaDto(Turno turno, PacienteSalidaDto pacienteSalidaDto, OdontologoSalidaDto odontologoSalidaDto) {
 
         TurnoSalidaDto turnoSalidaDto = modelMapper.map(turno, TurnoSalidaDto.class);

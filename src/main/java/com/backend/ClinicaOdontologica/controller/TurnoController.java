@@ -24,7 +24,7 @@ public class TurnoController {
         this.turnoService = turnoService;
     }
 
-    //-----------------------------------------------
+
 
 
     @PostMapping("registrar")

@@ -20,7 +20,7 @@ import java.util.List;
 public class PacienteController {
 
 
-    private IPacienteService pacienteService; //Inyeccion de dependencia de Interfaz pacienteService
+    private IPacienteService pacienteService;
 
     public PacienteController(IPacienteService pacienteService) {
         this.pacienteService = pacienteService;
@@ -28,11 +28,8 @@ public class PacienteController {
 
 
 
-    //-----------------------
 
 
-
-    //POST
     @PostMapping("/registrar")
     public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente) throws BadRequestException {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
@@ -41,7 +38,7 @@ public class PacienteController {
 
 
 
-    //GET
+
     @GetMapping("/PacienteId")
     public ResponseEntity<PacienteSalidaDto> buscarPacientePorID(@RequestParam Long id){
          return new ResponseEntity<>(pacienteService.buscarPorId(id), HttpStatus.OK);
@@ -68,32 +65,10 @@ public class PacienteController {
 
 
 
-    //PUT
+
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto pacienteEntradaDto, @RequestParam Long id) throws ResourceNotFoundException{
        return new ResponseEntity<>( pacienteService.modificarPaciente(pacienteEntradaDto, id), HttpStatus.CREATED);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

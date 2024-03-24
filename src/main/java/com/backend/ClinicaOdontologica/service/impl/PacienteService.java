@@ -3,13 +3,9 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 
 
-import com.backend.ClinicaOdontologica.dto.entrada.DomicilioEntradaDto;
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
-import com.backend.ClinicaOdontologica.dto.salida.OdontologoSalidaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
-import com.backend.ClinicaOdontologica.entity.Odontologo;
 import com.backend.ClinicaOdontologica.entity.Paciente;
-import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.backend.ClinicaOdontologica.repository.IPacienteRepository;
 import com.backend.ClinicaOdontologica.service.IPacienteService;
@@ -42,7 +38,6 @@ public class PacienteService implements IPacienteService {
     }
 
 
-    //--------------------------------
 
 
     @Override
@@ -86,18 +81,17 @@ public class PacienteService implements IPacienteService {
     @Override
     public List<PacienteSalidaDto> listarPacientes() {
 
-        //FORMA NRO DOS
-        //Almacenamiento de list con ejecucion de metodo
+
         List<Paciente> pacientes = pacienteRepository.findAll();
 
-        //ArrayList de tipo pacienteSalidaDto
+
         List<PacienteSalidaDto> pacientesSalidaDto = new ArrayList<>();
 
-        //Iteramos sobre pacientes
+
         for (Paciente paciente: pacientes) {
-            //Se cambia tipo de dato de Entity (paciente) a SalidaDTO
+
             PacienteSalidaDto pacienteSalidaDto = modelMapper.map(paciente, PacienteSalidaDto.class);
-            //Se añade a la lista de salidaDto los resultados "parseados"
+
             pacientesSalidaDto.add(pacienteSalidaDto);
         }
         LOGGER.info("Listado de todos los pacientes: {}", JsonPrinter.toString(pacientesSalidaDto ));
@@ -174,7 +168,7 @@ public class PacienteService implements IPacienteService {
 
     private void configureMapping() {
         modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
-                .addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));  //lambda function (arrow function)
+                .addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));
 
 
         modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)

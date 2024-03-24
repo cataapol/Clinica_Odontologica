@@ -33,7 +33,7 @@ public class Turno {
     }
 
 
-//-------------------------------------------
+
     public Long getId() {
         return id;
     }

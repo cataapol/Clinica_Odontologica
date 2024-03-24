@@ -24,7 +24,6 @@ public class OdontologoEntradaDto {
     private String apellido;
 
 
-    //---------CONSTRUCTORES------------
 
 
     public OdontologoEntradaDto() {
@@ -62,7 +61,6 @@ public class OdontologoEntradaDto {
 
 
 
-    //---------VALIDACIONES------------
 
 
 
