@@ -11,7 +11,7 @@ import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
 import java.util.List;
 
 public interface IPacienteService {
-    PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto) throws BadRequestException;
+    PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto);
     List<PacienteSalidaDto> listarPacientes();
     PacienteSalidaDto buscarPorId(Long id);
 

@@ -18,6 +18,7 @@ public class Turno {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
+    @Column
     private LocalDateTime fechaYHora;
 
 //-----------------------------------

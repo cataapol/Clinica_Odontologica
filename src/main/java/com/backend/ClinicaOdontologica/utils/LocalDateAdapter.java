@@ -5,23 +5,20 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class LocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
-    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
-    @Override
-    public JsonElement serialize(LocalDate localDate, Type srcType, JsonSerializationContext context) {
-        return new JsonPrimitive(dateFormatter.format(localDate));
-    }
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
-    public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
-        return LocalDate.parse(json.getAsString(),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.ENGLISH));
+    public JsonElement serialize(final LocalDate date, final Type typeOfSrc, final JsonSerializationContext context) {
+        return new JsonPrimitive(date.format(formatter));
     }
+    @Override
+    public LocalDate deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
+        return LocalDate.parse(json.getAsString(), formatter);
 
+    }
 
 }

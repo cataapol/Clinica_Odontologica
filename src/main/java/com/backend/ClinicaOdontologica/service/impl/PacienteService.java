@@ -5,7 +5,9 @@ package com.backend.ClinicaOdontologica.service.impl;
 
 import com.backend.ClinicaOdontologica.dto.entrada.DomicilioEntradaDto;
 import com.backend.ClinicaOdontologica.dto.entrada.PacienteEntradaDto;
+import com.backend.ClinicaOdontologica.dto.salida.OdontologoSalidaDto;
 import com.backend.ClinicaOdontologica.dto.salida.PacienteSalidaDto;
+import com.backend.ClinicaOdontologica.entity.Odontologo;
 import com.backend.ClinicaOdontologica.entity.Paciente;
 import com.backend.ClinicaOdontologica.exception.BadRequestException;
 import com.backend.ClinicaOdontologica.exception.ResourceNotFoundException;
@@ -44,25 +46,40 @@ public class PacienteService implements IPacienteService {
 
 
     @Override
-    public PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto) throws BadRequestException {
+    public PacienteSalidaDto registrarPaciente(PacienteEntradaDto pacienteEntradaDto) {
 
-        PacienteSalidaDto pacienteSalidaDto;
 
-        DomicilioEntradaDto domicilio = pacienteEntradaDto.getDomicilioEntradaDto();
+        LOGGER.info("PacienteEntradaDto: {}", JsonPrinter.toString(pacienteEntradaDto));
 
-        if(domicilio!= null){
-            Paciente pacienteRegistrado = pacienteRepository.save(modelMapper.map(pacienteEntradaDto, Paciente.class));
-            pacienteSalidaDto = modelMapper.map(pacienteRegistrado, PacienteSalidaDto.class);
+        Paciente pacienteEntity = modelMapper.map(pacienteEntradaDto, Paciente.class);
 
-            LOGGER.info("Paciente registrado correctamente! {} ", pacienteRegistrado);
+        Paciente pacienteConId = pacienteRepository.save(pacienteEntity);
 
-        } else {
-            LOGGER.error("No existe domicilio, no se pudo crear el paciente ");
-            throw new BadRequestException("No se pudo crear el paciente, no existe el domicilio");
 
-        }
+
+        PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteConId, PacienteSalidaDto.class);
+
+        LOGGER.info("Se creó un nuevo odontólogo: {}", JsonPrinter.toString(pacienteSalidaDto));
 
         return pacienteSalidaDto;
+
+//        PacienteSalidaDto pacienteSalidaDto;
+//
+//        DomicilioEntradaDto domicilio = pacienteEntradaDto.getDomicilioEntradaDto();
+//
+//        if(domicilio!= null){
+//            Paciente pacienteRegistrado = pacienteRepository.save(modelMapper.map(pacienteEntradaDto, Paciente.class));
+//            pacienteSalidaDto = modelMapper.map(pacienteRegistrado, PacienteSalidaDto.class);
+//
+//            LOGGER.info("Paciente registrado correctamente! {} ", pacienteRegistrado);
+//
+//        } else {
+//            LOGGER.error("No existe domicilio, no se pudo crear el paciente ");
+//            throw new BadRequestException("No se pudo crear el paciente, no existe el domicilio");
+//
+//        }
+//
+//        return pacienteSalidaDto;
     }
 
 
