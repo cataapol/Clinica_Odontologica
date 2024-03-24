@@ -11,7 +11,7 @@ public class PacienteSalidaDto {
     private String apellido;
     private int dni;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-dd hh:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-dd")
     private LocalDate fechaIngreso;
 
     private DomicilioSalidaDto domicilioSalidaDto;

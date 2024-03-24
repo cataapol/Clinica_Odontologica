@@ -29,6 +29,7 @@ public class PacienteEntradaDto {
     @JsonProperty("fecha_ingreso")
     private LocalDate fechaIngreso;
 
+
     @NotNull(message = "El domicilio del paciente no puede ser nulo")
     @Valid
     private DomicilioEntradaDto domicilioEntradaDto;

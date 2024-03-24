@@ -54,7 +54,7 @@ public class PacienteService implements IPacienteService {
 
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteConId, PacienteSalidaDto.class);
 
-        LOGGER.info("Se creó un nuevo odontólogo: {}", JsonPrinter.toString(pacienteSalidaDto));
+        LOGGER.info("Se creó un nuevo paciente: {}", JsonPrinter.toString(pacienteSalidaDto));
 
         return pacienteSalidaDto;
 
@@ -126,7 +126,7 @@ public class PacienteService implements IPacienteService {
             LOGGER.warn("Paciente eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el paciente {} ",  id);
-            throw new ResourceNotFoundException("No existe registro de paciente con id {}" + id);
+            throw new ResourceNotFoundException("No existe registro de paciente con id " + id);
         }
     }
 
