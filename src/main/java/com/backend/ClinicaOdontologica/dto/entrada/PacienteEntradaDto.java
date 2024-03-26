@@ -1,12 +1,14 @@
 package com.backend.ClinicaOdontologica.dto.entrada;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 import java.time.LocalDate;
 
+@JsonIgnoreProperties()
 public class PacienteEntradaDto {
 
     @NotNull(message = "El nombre no puede ser nulo")
@@ -29,9 +31,8 @@ public class PacienteEntradaDto {
     @JsonProperty("fecha_ingreso")
     private LocalDate fechaIngreso;
 
-
-    @NotNull(message = "El domicilio del paciente no puede ser nulo")
     @Valid
+    @NotNull(message = "El domicilio del paciente no puede ser nulo")
     private DomicilioEntradaDto domicilioEntradaDto;
 
 

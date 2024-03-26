@@ -1,5 +1,7 @@
 package com.backend.ClinicaOdontologica.dto.entrada;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.Valid;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
@@ -15,11 +17,11 @@ public class TurnoEntradaDto {
     @NotNull(message = "El paciente asignado al turno no puede ser nulo")
     private Long PacienteId;
 
-    @FutureOrPresent( message = "La fecha del turno no puede ser previa al dia de hoy.")
-    @NotNull(message = "Se debe especificar la fecha y hora del turno")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @FutureOrPresent(message = "La fecha del turno no puede ser previa al día de hoy")
+    @NotNull(message = "Debe especificarse la fecha y hora del turno")
+    @JsonProperty("dia_hora_ingreso")
     private LocalDateTime fechaYHora;
-
 
     public TurnoEntradaDto() {
     }

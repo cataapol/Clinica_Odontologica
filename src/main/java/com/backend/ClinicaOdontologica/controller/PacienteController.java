@@ -31,7 +31,7 @@ public class PacienteController {
 
 
     @PostMapping("/registrar")
-    public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente) throws BadRequestException {
+    public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente) {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
 

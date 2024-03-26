@@ -35,6 +35,7 @@ public class PacienteService implements IPacienteService {
     public PacienteService(IPacienteRepository pacienteRepository, ModelMapper modelMapper) {
         this.pacienteRepository = pacienteRepository;
         this.modelMapper = modelMapper;
+        configureMapping();
     }
 
 
@@ -58,23 +59,6 @@ public class PacienteService implements IPacienteService {
 
         return pacienteSalidaDto;
 
-//        PacienteSalidaDto pacienteSalidaDto;
-//
-//        DomicilioEntradaDto domicilio = pacienteEntradaDto.getDomicilioEntradaDto();
-//
-//        if(domicilio!= null){
-//            Paciente pacienteRegistrado = pacienteRepository.save(modelMapper.map(pacienteEntradaDto, Paciente.class));
-//            pacienteSalidaDto = modelMapper.map(pacienteRegistrado, PacienteSalidaDto.class);
-//
-//            LOGGER.info("Paciente registrado correctamente! {} ", pacienteRegistrado);
-//
-//        } else {
-//            LOGGER.error("No existe domicilio, no se pudo crear el paciente ");
-//            throw new BadRequestException("No se pudo crear el paciente, no existe el domicilio");
-//
-//        }
-//
-//        return pacienteSalidaDto;
     }
 
 

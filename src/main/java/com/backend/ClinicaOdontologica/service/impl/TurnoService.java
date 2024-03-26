@@ -70,10 +70,11 @@ public class TurnoService implements ITurnoService {
 
         } else {
 
-            Turno turnoRegistrado = turnoRepository.save(modelMapper.map(turnoEntradaDto, Turno.class));
-            turnoSalidaDto = entidadASalidaDto(turnoRegistrado, paciente, odontologo);
+            Turno turnoNuevo = turnoRepository.save(modelMapper.map(turnoEntradaDto, Turno.class));
 
-            LOGGER.info("Turno registrado correctamente! {} ", turnoRegistrado);
+            turnoSalidaDto = entidadASalidaDto(turnoNuevo, paciente, odontologo);
+
+            LOGGER.info("Turno registrado con exito: {}", turnoSalidaDto);
         }
 
         return turnoSalidaDto;
@@ -175,7 +176,6 @@ public class TurnoService implements ITurnoService {
 
 
     private TurnoSalidaDto entidadASalidaDto(Turno turno, PacienteSalidaDto pacienteSalidaDto, OdontologoSalidaDto odontologoSalidaDto) {
-
         TurnoSalidaDto turnoSalidaDto = modelMapper.map(turno, TurnoSalidaDto.class);
         turnoSalidaDto.setPacienteSalidaDto(pacienteSalidaDto);
         turnoSalidaDto.setOdontologoSalidaDto(odontologoSalidaDto);
