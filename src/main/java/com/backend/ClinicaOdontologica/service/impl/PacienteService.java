@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -106,7 +107,7 @@ public class PacienteService implements IPacienteService {
     public void eliminarPacientePorId(Long id) throws ResourceNotFoundException {
 
         if (buscarPorId(id) != null) {
-            pacienteRepository.deleteAllById(id);
+            pacienteRepository.deleteById(id);
             LOGGER.warn("Paciente eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el paciente {} ",  id);

@@ -92,7 +92,7 @@ public class OdontologoService implements IOdontologoService {
     public void eliminarOdontologoPorId(Long id)  throws ResourceNotFoundException {
 
         if (buscarOdontologoPorId(id) != null) {
-            odontologoRepository.deleteAllById(id);
+            odontologoRepository.deleteById(id);
             LOGGER.warn("Odontologo eliminado {} ",  id);
         } else {
             LOGGER.error("No se ha encontrado el odontologo {} ",  id);
