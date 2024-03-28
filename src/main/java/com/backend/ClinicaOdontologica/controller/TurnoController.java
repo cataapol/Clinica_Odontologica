@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/turnos")
 public class TurnoController {
 
@@ -32,8 +33,8 @@ public class TurnoController {
         return new ResponseEntity<>(turnoService.registrar(turnoEntradaDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/turnoId")
-    public ResponseEntity<TurnoSalidaDto> buscarPorId(@RequestParam Long id) {
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<TurnoSalidaDto> buscarPorId(@PathVariable Long id) {
         return new ResponseEntity<>(turnoService.buscarPorId(id), HttpStatus.OK);
     }
 

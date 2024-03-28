@@ -1,4 +1,6 @@
 package com.backend.ClinicaOdontologica.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -7,7 +9,7 @@ import java.time.LocalDateTime;
 public class Turno {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -15,6 +17,7 @@ public class Turno {
     private Odontologo odontologo;
 
     @ManyToOne
+
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
@@ -37,6 +40,7 @@ public class Turno {
     public Long getId() {
         return id;
     }
+
 
     public Odontologo getOdontologo() {
         return odontologo;

@@ -32,30 +32,33 @@ function capturarDatos() {
         }
     }
 
+
     return objPaciente;
 }
 
-function registrarPaciente() {
-    const datosPaciente = capturarDatos();
+    function registrarPaciente() {
+        const datosPaciente = capturarDatos();
 
-    console.log("Datos del paciente:", datosPaciente);
+        console.log(datosPaciente)
 
-    const configuraciones = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosPaciente)
+        console.log("Datos del paciente:", datosPaciente);
+
+        const configuraciones = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datosPaciente)
+        }
+
+        const apiPacienteRegistro = 'http://localhost:8080/pacientes/registrar';
+
+        fetch(apiPacienteRegistro, configuraciones)
+            .then((respuesta) => respuesta.json())
+            .then((data) => {
+                console.log(data);
+            })
     }
-
-    const apiPacienteRegistro = 'http://localhost:8080/pacientes/registrar';
-
-    fetch(apiPacienteRegistro, configuraciones)
-        .then((respuesta) => respuesta.json())
-        .then((data) => {
-            console.log(data);
-        })
-}
 
 
 document.getElementById("formulario").addEventListener('submit', (e) => {

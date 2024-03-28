@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/odontologos")
 public class OdontologoController {
 
@@ -35,8 +36,8 @@ public class OdontologoController {
 
 
 
-    @GetMapping("/odontologoId")
-    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorID(@RequestParam Long id) {
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorID(@PathVariable Long id) {
         return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
     }
 

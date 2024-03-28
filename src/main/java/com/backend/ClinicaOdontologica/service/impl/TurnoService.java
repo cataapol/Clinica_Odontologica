@@ -113,12 +113,11 @@ public class TurnoService implements ITurnoService {
     @Override
     public void eliminarTurno(Long id) throws ResourceNotFoundException{
 
-        if (buscarPorId(id) != null) {
+        if (turnoRepository.findById(id) != null){
             turnoRepository.deleteById(id);
-            LOGGER.warn("Turno eliminado {} ",  id);
+            LOGGER.warn("El turno con id {} eliminado! ", id);
         } else {
-            LOGGER.error("No se ha encontrado el turno {} ",  id);
-            throw new ResourceNotFoundException("No existe registro de turno con el id {}" + id);
+            throw new ResourceNotFoundException("No existe registro de turno con el id " + id);
         }
 
     }
