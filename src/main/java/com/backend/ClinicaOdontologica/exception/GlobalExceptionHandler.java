@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice //Es un advisor (avisador). Avisa al controlador que hacer cuando se lanzan las excepciones dentro
+@RestControllerAdvice
 public class GlobalExceptionHandler extends Exception{
 
-    @ExceptionHandler(ResourceNotFoundException.class) //Entre llaves porque se puede definir mas de una (del mismo tipo)
+    @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
 
     public Map<String, String> manejarResourceNotFound(ResourceNotFoundException resourceNotFoundException) {
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler extends Exception{
 
 
 
-    @ExceptionHandler(MethodArgumentNotValidException.class) //Exception para validaciones de dto.
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> manejarMethodNotValid(MethodArgumentNotValidException methodArgumentNotValidException) {
 
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler extends Exception{
 
         methodArgumentNotValidException.getBindingResult().getAllErrors().forEach(e -> {
 
-            String nombreCampo = ((FieldError) e).getField(); //nombre del campo en el cual se genero el error
+            String nombreCampo = ((FieldError) e).getField();
 
             String errorMsg = e.getDefaultMessage();
 

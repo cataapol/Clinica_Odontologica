@@ -56,7 +56,7 @@ class TurnoServiceTest {
 
     @Test
     @Order(2)
-    public void deberiaRegistrarUnTurnoExitosamentey() throws BadRequestException {
+    public void deberiaRegistrarUnTurnoExitosamente() throws BadRequestException {
 
         DomicilioEntradaDto domicilioPaciente = new DomicilioEntradaDto("Calle", 24, "Localidad", "Provincia");
 

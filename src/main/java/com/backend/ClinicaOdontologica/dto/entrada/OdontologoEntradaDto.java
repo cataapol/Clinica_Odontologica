@@ -2,7 +2,7 @@ package com.backend.ClinicaOdontologica.dto.entrada;
 
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull; //ES CON JAVAX - VER REPOSITORIO POM.XML
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class OdontologoEntradaDto {
