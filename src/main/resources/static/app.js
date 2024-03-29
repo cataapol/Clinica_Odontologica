@@ -1,67 +1,29 @@
-function capturarDatos() {
-
-    const nombre = document.getElementById("nombre").value;
-    const apellido = document.getElementById("apellido").value;
-    const dni = document.getElementById("dni").value;
-    const fechaIngresoClinica = document.getElementById("fechaIngreso").value;
-    const nombreCalle = document.getElementById("calle").value;
-    const numeroDomicilio = document.getElementById("numero").value;
-    const nombreLocalidad = document.getElementById("localidad").value;
-    const nombreProvincia = document.getElementById("provincia").value;
-
-    console.log("Nombre:", nombre);
-    console.log("Apellido:", apellido);
-    console.log("DNI:", dni);
-    console.log("Fecha de ingreso:", fechaIngresoClinica);
-    console.log("Calle:", nombreCalle);
-    console.log("Número:", numeroDomicilio);
-    console.log("Localidad:", nombreLocalidad);
-    console.log("Provincia:", nombreProvincia);
-
-
-    const objPaciente = {
-        nombre: nombre,
-        apellido: apellido,
-        dni: dni,
-        fechaIngresoClinica: fechaIngresoClinica,
-        domicilio: {
-         calle: nombreCalle,
-         numero: numeroDomicilio,
-         localidad: nombreLocalidad,
-         provincia: nombreProvincia
-        }
-    }
-
-
-    return objPaciente;
+function obtenerPacientes() {
+    fetch('http://localhost:8080/pacientes/buscarTodos')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener la lista de pacientes');
+            }
+            return response.json();
+        })
+        .then(pacientes => {
+            console.log('Lista de pacientes:', pacientes);
+            mostrarPacientes(pacientes);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
-    function registrarPaciente() {
-        const datosPaciente = capturarDatos();
+function mostrarPacientes(pacientes) {
+    const listaPacientes = document.getElementById('lista-pacientes');
+    listaPacientes.innerHTML = '';
 
-        console.log(datosPaciente)
+    pacientes.forEach(paciente => {
+        const pacienteItem = document.createElement('li');
+        pacienteItem.textContent = `${paciente.nombre} ${paciente.apellido} - DNI: ${paciente.dni}`;
+        listaPacientes.appendChild(pacienteItem);
+    });
+}
 
-        console.log("Datos del paciente:", datosPaciente);
-
-        const configuraciones = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(datosPaciente)
-        }
-
-        const apiPacienteRegistro = 'http://localhost:8080/pacientes/registrar';
-
-        fetch(apiPacienteRegistro, configuraciones)
-            .then((respuesta) => respuesta.json())
-            .then((data) => {
-                console.log(data);
-            })
-    }
-
-
-document.getElementById("formulario").addEventListener('submit', (e) => {
-    e.preventDefault();
-    registrarPaciente();
-});
+document.getElementById('btnMostrarPacientes').addEventListener('click', obtenerPacientes);
